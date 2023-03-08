@@ -188,7 +188,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
               CupertinoButton(
                 color: MyThemeData.darkBluish,
-                  child: Text("Submit") , onPressed: (){
+                  child: Text("Submit") , onPressed: (){ 
                   checkValues();
               })
 
