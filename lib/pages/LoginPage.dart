@@ -24,11 +24,11 @@ class LoginPageState extends State<LoginPage> {
   var passwordController =TextEditingController();
 
 
-  void checkValue(){
+  void checkValue(String email,String password){
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if(email==""||password==""){
+    if(email.isEmpty ||password.isEmpty){
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the fields")));
     }
     else{
@@ -43,8 +43,8 @@ class LoginPageState extends State<LoginPage> {
 
     try{
       credential =await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email.toString(),
-          password: password.toString(),
+          email: email,
+          password: password,
       );
     } on FirebaseAuthException catch(error){
       ScaffoldMessenger.of(context).showSnackBar(
@@ -58,15 +58,12 @@ class LoginPageState extends State<LoginPage> {
       print("entering in if condition");
 
       String uid = credential.user!.uid;
+      DocumentSnapshot<Map<String, dynamic>> userData = await  FirebaseFirestore.instance.
+       collection("users").doc(uid.toString()).get() ;
 
-       DocumentSnapshot userData = FirebaseFirestore.instance.
-       collection("users").doc(uid.toString()).get() as DocumentSnapshot;
-
-       UserModel userModel = UserModel.fromMap(userData as Map<String,dynamic>);
+      UserModel userModel = UserModel.fromMap(userData.data() as Map<String,dynamic>);
 
        //go to homepage
-      print('Login successfull(^_^)');
-
       Navigator.pushReplacement(context,
           MaterialPageRoute(
               builder: (context)=> HomePage(userModel: userModel, firebaseUser:credential!.user!)
@@ -116,7 +113,7 @@ class LoginPageState extends State<LoginPage> {
 
                   CupertinoButton(
                       onPressed: (){
-                        checkValue();
+                        checkValue(emailController.toString(),passwordController.toString());
                       },
                     child: Text("Log In"),
                     color: MyThemeData.darkBluish,

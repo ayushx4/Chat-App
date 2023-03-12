@@ -26,6 +26,7 @@ class CompleteProfile extends StatefulWidget {
 class _CompleteProfileState extends State<CompleteProfile> {
 
   CroppedFile? imageFile;
+
   var fullNameController = TextEditingController();
 
 
@@ -52,8 +53,11 @@ class _CompleteProfileState extends State<CompleteProfile> {
     if(croppedImage!=null){
       setState(() {
         imageFile = croppedImage;
-
       });
+
+      print(imageFile as String);
+      print("____________---______-----____________----********************");
+
     }
   }
 
@@ -93,9 +97,12 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
   void checkValues(){
     print('Entering check valute function');
+
     String fullName = fullNameController.text.trim();
 
-    if(fullName=="" || imageFile=="") {
+    log(fullName+"_________________________________________________");
+
+    if(fullName.isEmpty || imageFile=="") {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content:Text("Please fill all the fields"))
       );
@@ -113,19 +120,39 @@ class _CompleteProfileState extends State<CompleteProfile> {
     log("Uploading Data........");
     log("Uploading Data........");
     log("Uploading Data........");
-    UploadTask uploadTask = FirebaseStorage.instance.ref("profilepictures").
+
+    UploadTask uploadTask = FirebaseStorage.instance.ref("profilepicture").
     child(widget.userModel.uid.toString()).putFile(File(imageFile!.path));
 
-    TaskSnapshot snapshot =await uploadTask;
+    log(">>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<");
+    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>');
 
-    String imageUrl = await snapshot.ref.getDownloadURL();
+    TaskSnapshot snapshot =await uploadTask.snapshot;
+
+    log("Data Up to date %%%%%%%%%%%%%**********#########################");
+    log("Data Up to date %%%%%%%%%%%%%**********#########################");
+    log("Data Up to date %%%%%%%%%%%%%**********#########################");
+
+
+    String imageUrl = await snapshot.ref.getDownloadURL().toString();
     String fullName = fullNameController.text.trim();
+
+    log(imageUrl.toString());
+    log(imageUrl.toString());
+    log(imageUrl.toString());
+
+    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
     widget.userModel.fullName = fullName;
     widget.userModel.profilePic =  imageUrl;
 
-    await FirebaseFirestore.instance.collection("Users").doc(widget.userModel.uid).set(widget.userModel.toMap());
-    
+    await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap());
+    print('Data uploaded');
+    print('Data uploaded');
+    print('Data uploaded');
+
     Navigator.push(context,
         MaterialPageRoute(
             builder: (context)=> HomePage(userModel: widget.userModel, firebaseUser: widget.firebaseUser)
@@ -189,7 +216,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
               CupertinoButton(
                 color: MyThemeData.darkBluish,
                   child: Text("Submit") , onPressed: (){
-                  checkValues();
+                print('button press______________-------------_________');
+                    checkValues();
               })
 
 
