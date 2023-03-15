@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main()async{
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -18,22 +18,26 @@ void main()async{
   log("above if condition&&&&&&&&&&&&&&&&&");
 
 
-  if(currentUser!=null){
+  if (currentUser != null) {
     log("entering first condition)))))))))))))))))))");
-    UserModel? thisUserModel = await FirebaseHelper.getUserModelById(currentUser.uid.toString());
+    UserModel? thisUserModel = await FirebaseHelper.getUserModelById(
+        currentUser.uid.toString());
 
-    if(thisUserModel!=null){
+
+    if (thisUserModel != null) {
       log("Entering second condition((((((((((((((((((((");
-      runApp(MyAppLoggedIn(userModel: thisUserModel, firebaseUser: currentUser));
+      runApp(
+          MyAppLoggedIn(firebaseUser: currentUser, userModel: thisUserModel));
     }
-    else{
+    else {
       runApp(MyApp());
     }
   }
-  else{
+  else {
     runApp(MyApp());
   }
-  }
+}
+
 
 
 //user not logged in

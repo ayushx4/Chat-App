@@ -6,7 +6,7 @@ class FirebaseHelper {
 
   static Future<UserModel?> getUserModelById(String uid) async{
     UserModel? userModel;
-    DocumentSnapshot documentSnapshot =await FirebaseFirestore.instance.collection("user").doc(uid).get();
+    DocumentSnapshot documentSnapshot =await FirebaseFirestore.instance.collection("users").doc(uid).get();
 
     if(documentSnapshot != null){
       userModel = UserModel.fromMap(documentSnapshot.data() as Map<String,dynamic>);

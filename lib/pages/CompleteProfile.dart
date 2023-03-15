@@ -117,38 +117,48 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
     //We use UploadTask for get image url and we add this url into firebase .
     log("Uploading Data........");
-    log("Uploading Data........");
-    log("Uploading Data........");
-    log("Uploading Data........");
 
-    UploadTask uploadTask = FirebaseStorage.instance.ref("profilepicture").
-    child(widget.userModel.uid.toString()).putFile(File(imageFile!.path));
+    // UploadTask uploadTask = FirebaseStorage.instance.ref().
+    // child(widget.userModel.uid.toString()).putFile(File(imageFile!.path));
 
-    log(">>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<");
-    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>');
 
-    TaskSnapshot snapshot =await uploadTask.snapshot;
+    // TaskSnapshot snapshot =await uploadTask.snapshot;
 
+    Reference storageReference = FirebaseStorage.instance.ref().child("profilePics").child(widget.userModel.uid.toString());
+    UploadTask uploadTask =  storageReference.putFile(File(imageFile!.path));
+    await uploadTask.whenComplete(() => null);
+
+    storageReference.getDownloadURL().then((fileUrl) {
+      setState(() async {
+        String fullName = fullNameController.text.trim();
+        widget.userModel.fullName = fullName;
+        widget.userModel.profilePic =  fileUrl;
+
+        await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap());
+      });
+    }
+    );
+    
     log("Data Up to date %%%%%%%%%%%%%**********#########################");
-    log("Data Up to date %%%%%%%%%%%%%**********#########################");
-    log("Data Up to date %%%%%%%%%%%%%**********#########################");
 
+    // String imageUrl = await snapshot.ref.getDownloadURL().toString();
+    // String imageUrl = await snapshot.ref.getDownloadURL().toString();
+    // String imageUrl = imageUrl2.toString();
 
-    String imageUrl = await snapshot.ref.getDownloadURL().toString();
-    String fullName = fullNameController.text.trim();
+    // String fullName = fullNameController.text.trim();
 
-    log(imageUrl.toString());
-    log(imageUrl.toString());
-    log(imageUrl.toString());
+    // log(imageUrl.toString());
+    // log(imageUrl.toString());
+    // log(imageUrl.toString());
 
     log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
-    widget.userModel.fullName = fullName;
-    widget.userModel.profilePic =  imageUrl;
-
-    await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap());
+    // widget.userModel.fullName = fullName;
+    // widget.userModel.profilePic =  imageUrl;
+    //
+    // await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap());
     print('Data uploaded');
     print('Data uploaded');
     print('Data uploaded');
@@ -194,8 +204,6 @@ class _CompleteProfileState extends State<CompleteProfile> {
                   backgroundImage: (imageFile != null) ? FileImage(File(imageFile!.path)):null,
                   child: (imageFile == null) ? Icon(Icons.person,size: 55,) : null,
                 ),
-
-
                 onPressed: (){
                   showPhotoOptions();
                 },
