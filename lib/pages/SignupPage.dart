@@ -1,3 +1,4 @@
+import 'package:chat_app/models/UiHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/CompleteProfile.dart';
 import 'package:chat_app/utils/routes.dart';
@@ -29,15 +30,18 @@ class _SignupPageState extends State<SignupPage> {
     String cPassword = cPasswordController.text.trim();
 
     if(email.isEmpty || password.isEmpty || cPassword.isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please fill all the fields!"))
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text("Please fill all the fields!"))
+      // );
+      UiHelper.showAlertDialog(context, "Incomplete Data", "Please fill all the fields");
+
     }
     else if(password!=cPassword){
       print('Password do not match');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Password do not match"))
-      );
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text("Password do not match"))
+    //   );
+      UiHelper.showAlertDialog(context, "Password Mismatch", "The passwords you entered do not match!");
     }
     else{
       print('Sign up succesfully');
@@ -48,14 +52,17 @@ class _SignupPageState extends State<SignupPage> {
 
   void signUp(String email,String paassword) async{
     UserCredential? credential;
-
+    
+    UiHelper.showLoadingDialog(context, "Creating new account...");
     try{
       credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: paassword);
     } on FirebaseAuthException catch(error){
       print(error.message.toString());
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.message.toString()))
-      );
+      Navigator.pop(context);
+      UiHelper.showAlertDialog(context, "An error occured", error.message.toString());
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text(error.message.toString()))
+      // );
     }
 
 
@@ -71,6 +78,7 @@ class _SignupPageState extends State<SignupPage> {
       await FirebaseFirestore.instance.collection("users").doc(uid).set(newUser.toMap()).then((value){
         print('new user created');
         // Navigator.pushReplacementNamed(context, MyRoutes.completeProfile);
+        Navigator.popUntil(context, (route) => route.isFirst);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context)=> CompleteProfile(userModel: newUser, firebaseUser: credential!.user!)

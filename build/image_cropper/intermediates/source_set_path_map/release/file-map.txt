@@ -1,0 +1,20 @@
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-core-1.6.0-0 C:\Users\ayush\.gradle\caches\transforms-3\1141b72fb8be4e566e7814849b1aa3a2\transformed\core-1.6.0\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-appcompat-resources-1.3.0-1 C:\Users\ayush\.gradle\caches\transforms-3\247674d6757987479c94a0baaaf361b2\transformed\jetified-appcompat-resources-1.3.0\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-transition-1.4.1-2 C:\Users\ayush\.gradle\caches\transforms-3\34b189bca97fdc951b0c2d4d63d6e58f\transformed\transition-1.4.1\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-lifecycle-viewmodel-2.3.1-3 C:\Users\ayush\.gradle\caches\transforms-3\3c6e1000ef518b345db99a9c15a41b57\transformed\lifecycle-viewmodel-2.3.1\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-lifecycle-runtime-2.3.1-4 C:\Users\ayush\.gradle\caches\transforms-3\3f72585791551b99ffe7042bd9a470de\transformed\lifecycle-runtime-2.3.1\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-window-1.0.0-beta04-5 C:\Users\ayush\.gradle\caches\transforms-3\40ff8c014bc3b03149787e1d45a42dea\transformed\jetified-window-1.0.0-beta04\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-savedstate-1.1.0-6 C:\Users\ayush\.gradle\caches\transforms-3\6e801270dc17b112b68e356eb067fb0a\transformed\jetified-savedstate-1.1.0\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-appcompat-1.3.0-7 C:\Users\ayush\.gradle\caches\transforms-3\7d79b99ec9cc793464994b67f64f6148\transformed\appcompat-1.3.0\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-annotation-experimental-1.1.0-8 C:\Users\ayush\.gradle\caches\transforms-3\a6362f1fb79a6245a27920bb99ff99c3\transformed\jetified-annotation-experimental-1.1.0\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-fragment-1.3.4-9 C:\Users\ayush\.gradle\caches\transforms-3\af0994a6f0c417d9add1cd8348a70233\transformed\fragment-1.3.4\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-ucrop-2.2.8-10 C:\Users\ayush\.gradle\caches\transforms-3\ce1a8df4d39638b54341553a13faed02\transformed\jetified-ucrop-2.2.8\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-jetified-window-java-1.0.0-beta04-11 C:\Users\ayush\.gradle\caches\transforms-3\ed438543a8e9ffa856a2b095c92f0ea3\transformed\jetified-window-java-1.0.0-beta04\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-main-12 C:\Users\ayush\AppData\Local\Pub\Cache\hosted\pub.dev\image_cropper-3.0.1\android\src\main\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-release-13 C:\Users\ayush\AppData\Local\Pub\Cache\hosted\pub.dev\image_cropper-3.0.1\android\src\release\res
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-pngs-14 E:\Flutter Projects\chat_app\build\image_cropper\generated\res\pngs\release
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-resValues-15 E:\Flutter Projects\chat_app\build\image_cropper\generated\res\resValues\release
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-rs-16 E:\Flutter Projects\chat_app\build\image_cropper\generated\res\rs\release
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-mergeReleaseResources-17 E:\Flutter Projects\chat_app\build\image_cropper\intermediates\incremental\release\mergeReleaseResources\merged.dir
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-mergeReleaseResources-18 E:\Flutter Projects\chat_app\build\image_cropper\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+vn.hunghd.flutter.plugins.imagecropper.image_cropper-merged_res-19 E:\Flutter Projects\chat_app\build\image_cropper\intermediates\merged_res\release

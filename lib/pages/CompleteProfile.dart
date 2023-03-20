@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:chat_app/Widgets/theme_data.dart';
+import 'package:chat_app/models/UiHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/home-page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,16 +97,18 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
 
   void checkValues(){
-    print('Entering check valute function');
+    print('Entering check value function');
 
     String fullName = fullNameController.text.trim();
 
     log(fullName+"_________________________________________________");
 
     if(fullName.isEmpty || imageFile=="") {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content:Text("Please fill all the fields"))
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content:Text("Please fill all the fields"))
+      // );
+      
+      UiHelper.showAlertDialog(context, "Incomplete Data", "Please fill all the fields");
     }
     else{
       uploadData();
@@ -115,6 +118,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
   void uploadData() async{
 
+    UiHelper.showLoadingDialog(context, "Uploading image...");
     //We use UploadTask for get image url and we add this url into firebase .
     log("Uploading Data........");
 
@@ -163,7 +167,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
     print('Data uploaded');
     print('Data uploaded');
 
-    Navigator.push(context,
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(context,
         MaterialPageRoute(
             builder: (context)=> HomePage(userModel: widget.userModel, firebaseUser: widget.firebaseUser)
         ));

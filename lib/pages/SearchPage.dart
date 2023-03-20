@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/ChatRoomPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+
+import '../models/ChatRoomModel.dart';
 
 
 class SearchPage extends StatefulWidget{
@@ -23,44 +28,52 @@ class SearchPage extends StatefulWidget{
 class SearchPageState extends State<SearchPage>{
 
   TextEditingController searchController = TextEditingController();
-  // // String finalEnterdSearchName = enteredSearchNameController.text.trim();
-  // var searchResponse="Enter user name";
-  // // Future<List> getUsersUidList
-  // // Map<String,dynamic> getUsersUidList = await  FirebaseFirestore.instance.namedQueryGet(name)
 
-  //
-  // Future<bool> checkForSearch(String enteredName) async {
-  //
-  //   CollectionReference collectionReference = FirebaseFirestore.instance.collection("users");
-  //   bool enteredNameStatus = false;
-  //   QuerySnapshot querySnapshot = await collectionReference.get();
-  //   List allData = querySnapshot.docs.map((doc)=> doc.data()).toList();
-  //   // print(allData);
-  //
-  //   for(int a=0;a<allData.length;a++){
-  //
-  //     String uid;
-  //     Map<String,dynamic> getMap =allData[a];
-  //     String id = getMap["uid"];
-  //
-  //     DocumentSnapshot<Map<String,dynamic>> getUserModelMap = await FirebaseFirestore.instance.collection("users").doc(id).get();
-  //     UserModel userModel = UserModel.fromMap(getUserModelMap.data() as Map<String, dynamic>);
-  //     String checkUserName =userModel.fullName.toString().trim();
-  //     print(checkUserName);
-  //     print(enteredName);
-  //     print('::::::::::::::::::::::::::::::::::::::');
-  //     if(checkUserName==enteredName){
-  //       enteredNameStatus=true;
-  //     }
-  //     else{
-  //       print("no users founddddddd ************************");
-  //     }
-  //   }
-  //   print(enteredName);
-  //   print('?????????????????????????????????????????????????');
-  //   return enteredNameStatus;
-  // }
 
+  Future<ChatRoomModel?> getChatroomModel(UserModel targetUserModel) async {
+
+    ChatRoomModel? chatroomModel;
+
+    QuerySnapshot snapshot=await FirebaseFirestore.instance.collection("chatrooms").where
+      ("participants.${widget.userModel.uid}", isEqualTo: true).where
+      ("participants.${targetUserModel.uid}", isEqualTo: true).get();
+
+    if(snapshot.docs.length>0){
+      // Fetch the existing one
+      print('Chat room already created!');
+
+      var docData = snapshot.docs[0].data();
+
+      ChatRoomModel existingChatRoomModel = ChatRoomModel.fromMap(docData as Map<String,dynamic>);
+
+      chatroomModel= existingChatRoomModel;
+    }
+    else{
+      //Create chatRoomModel
+      print('ChatRoom not created?');
+      ChatRoomModel newChatRoomModel= ChatRoomModel(
+        chatRoomId: Uuid().v1(),  //here we use Uuid package for generate uid
+          lastMessage: "",
+        createdonChatroomModel: DateTime.now(),
+        participants:{
+          widget.userModel.uid.toString() : true,
+          targetUserModel.uid.toString() : true,
+        },
+        usersList: [widget.userModel.uid.toString() ,
+                    targetUserModel.uid.toString()]
+      );
+
+      await FirebaseFirestore.instance.collection("chatrooms").doc(
+         newChatRoomModel.chatRoomId).set(newChatRoomModel.toMap());
+
+      chatroomModel = newChatRoomModel;
+
+      print('New chatroom created');
+    }
+
+    return chatroomModel;
+
+  }
 
 
   @override
@@ -84,13 +97,7 @@ class SearchPageState extends State<SearchPage>{
                   ),
                 ),
 
-
                 SizedBox(height: 20,),
-
-                // CupertinoButton(child: Text('Search'), onPressed: (){
-                //
-                // }
-                // ),
 
                 ActionChip
                   (onPressed: (){
@@ -102,10 +109,12 @@ class SearchPageState extends State<SearchPage>{
                     label: Text("Search")
                 ),
 
-
                 StreamBuilder(
                   stream: FirebaseFirestore.instance.collection("users").
-                          where("fullName",isEqualTo: searchController.text.trim()).snapshots(),
+                          where("fullName",
+                      isEqualTo: searchController.text.trim(),
+                      isNotEqualTo: widget.userModel.fullName).snapshots(),
+
                     builder: (context ,snapshot) {
 
                       if(snapshot.connectionState == ConnectionState.active){
@@ -118,11 +127,21 @@ class SearchPageState extends State<SearchPage>{
                             UserModel searchedUserModel = UserModel.fromMap(userMap);
 
                             return ListTile(
-                              onTap: (){
-                                Navigator.pop(context);
-                                Navigator.push(context,
-                                MaterialPageRoute(builder: (context)=>ChatRoomPage(userModel: searchedUserModel)
-                                ));
+                              onTap: () async{
+
+                               ChatRoomModel? chatroomModel = await getChatroomModel(searchedUserModel);
+
+                               if(chatroomModel != null){
+                                 Navigator.popUntil(context, (route) => route.isFirst);
+                                 Navigator.push(context,
+                                     MaterialPageRoute(builder: (context)=>ChatRoomPage(
+                                       targetUserModel: searchedUserModel,
+                                       userModel: widget.userModel,
+                                       firebaseUser: widget.firebaseUser,
+                                       chatRoomModel: chatroomModel,
+                                     )
+                                     ));
+                               }
                               },
                               title: Text(searchedUserModel.fullName!),
                               subtitle: Text(searchedUserModel.email!),

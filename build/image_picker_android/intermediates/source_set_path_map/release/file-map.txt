@@ -1,0 +1,19 @@
+io.flutter.plugins.imagepicker.image_picker_android-lifecycle-viewmodel-2.5.1-0 C:\Users\ayush\.gradle\caches\transforms-3\04d7772205c59ba91cf9f6f0f71ab482\transformed\lifecycle-viewmodel-2.5.1\res
+io.flutter.plugins.imagepicker.image_picker_android-lifecycle-runtime-2.5.1-1 C:\Users\ayush\.gradle\caches\transforms-3\2ffe4b89810690e7aaf6cb4baa5d7e1c\transformed\lifecycle-runtime-2.5.1\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-lifecycle-viewmodel-savedstate-2.5.1-2 C:\Users\ayush\.gradle\caches\transforms-3\325b99142f7627acbd83238187a6170b\transformed\jetified-lifecycle-viewmodel-savedstate-2.5.1\res
+io.flutter.plugins.imagepicker.image_picker_android-core-1.8.0-3 C:\Users\ayush\.gradle\caches\transforms-3\36645dad4856a45a63618a9e4f104845\transformed\core-1.8.0\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-window-1.0.0-beta04-4 C:\Users\ayush\.gradle\caches\transforms-3\40ff8c014bc3b03149787e1d45a42dea\transformed\jetified-window-1.0.0-beta04\res
+io.flutter.plugins.imagepicker.image_picker_android-lifecycle-livedata-core-2.5.1-5 C:\Users\ayush\.gradle\caches\transforms-3\5763896017198c1206bc694a3b533af8\transformed\lifecycle-livedata-core-2.5.1\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-savedstate-1.2.0-6 C:\Users\ayush\.gradle\caches\transforms-3\6589a7f3eb925dea82ce23f6358173ae\transformed\jetified-savedstate-1.2.0\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-annotation-experimental-1.1.0-7 C:\Users\ayush\.gradle\caches\transforms-3\a6362f1fb79a6245a27920bb99ff99c3\transformed\jetified-annotation-experimental-1.1.0\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-window-java-1.0.0-beta04-8 C:\Users\ayush\.gradle\caches\transforms-3\ed438543a8e9ffa856a2b095c92f0ea3\transformed\jetified-window-java-1.0.0-beta04\res
+io.flutter.plugins.imagepicker.image_picker_android-jetified-activity-1.6.1-9 C:\Users\ayush\.gradle\caches\transforms-3\fed1541263c426e365f91ab77dda9c25\transformed\jetified-activity-1.6.1\res
+io.flutter.plugins.imagepicker.image_picker_android-main-10 C:\Users\ayush\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.5+9\android\src\main\res
+io.flutter.plugins.imagepicker.image_picker_android-release-11 C:\Users\ayush\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.5+9\android\src\release\res
+io.flutter.plugins.imagepicker.image_picker_android-packaged_res-12 E:\Flutter Projects\chat_app\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\release
+io.flutter.plugins.imagepicker.image_picker_android-pngs-13 E:\Flutter Projects\chat_app\build\image_picker_android\generated\res\pngs\release
+io.flutter.plugins.imagepicker.image_picker_android-resValues-14 E:\Flutter Projects\chat_app\build\image_picker_android\generated\res\resValues\release
+io.flutter.plugins.imagepicker.image_picker_android-rs-15 E:\Flutter Projects\chat_app\build\image_picker_android\generated\res\rs\release
+io.flutter.plugins.imagepicker.image_picker_android-mergeReleaseResources-16 E:\Flutter Projects\chat_app\build\image_picker_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.flutter.plugins.imagepicker.image_picker_android-mergeReleaseResources-17 E:\Flutter Projects\chat_app\build\image_picker_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.flutter.plugins.imagepicker.image_picker_android-merged_res-18 E:\Flutter Projects\chat_app\build\image_picker_android\intermediates\merged_res\release

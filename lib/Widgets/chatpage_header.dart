@@ -12,8 +12,11 @@ ChatPageHeader(String profilePic,String profileName){
       padding: EdgeInsets.all(10.0),
       child: Row(
         children: [
+          Icon(Icons.arrow_back),
+
           //Profile pic
           CircleAvatar(
+            backgroundColor: Colors.grey,
             backgroundImage: NetworkImage(profilePic),
           ),
 

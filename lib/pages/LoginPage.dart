@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:chat_app/Widgets/theme_data.dart';
 import 'package:chat_app/Widgets/toast.dart';
+import 'package:chat_app/models/UiHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/SignupPage.dart';
 import 'package:chat_app/pages/home-page.dart';
@@ -29,8 +31,10 @@ class LoginPageState extends State<LoginPage> {
     String password = passwordController.text.trim();
 
     if(email.isEmpty ||password.isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the fields")));
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the fields")));
+      UiHelper.showAlertDialog(context, "Incomplete Data", "Please fill all the fields");
     }
+    
     else{
       logIn(email, password);
     }
@@ -41,15 +45,19 @@ class LoginPageState extends State<LoginPage> {
 
     UserCredential? credential;
 
+    UiHelper.showLoadingDialog(context, "Logging in...");
+
     try{
       credential =await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
       );
     } on FirebaseAuthException catch(error){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.toString()))
-      );
+      Navigator.pop(context);
+      UiHelper.showAlertDialog(context, "An error occured", error.message.toString());
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text(error.toString()))
+      // );
     }
     print("try is comeplete");
 
@@ -63,6 +71,7 @@ class LoginPageState extends State<LoginPage> {
 
       UserModel userModel = UserModel.fromMap(userData.data() as Map<String,dynamic>);
 
+      Navigator.popUntil(context, (route) => route.isFirst);
        //go to homepage
       Navigator.pushReplacement(context,
           MaterialPageRoute(

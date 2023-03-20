@@ -1,16 +1,18 @@
-class MassegeModel{
+class MessageModel{
+  String? messageId;
   String? sender;
   String? text;
   bool? seen;
   DateTime? createdon;
 
-  MassegeModel({this.seen,this.sender,this.text,this.createdon});
+  MessageModel({this.seen,this.sender,this.text,this.createdon,this.messageId});
 
-  MassegeModel.fromMap(Map<String,dynamic> map){
+  MessageModel.fromMap(Map<String,dynamic> map){
     sender=map["sender"];
     text=map["text"];
     seen=map["seen"];
     createdon=map["createdon"].toDate();
+    messageId=map["messageId"];
 
   }
 
@@ -19,7 +21,8 @@ class MassegeModel{
       "sender" : sender,
       "text" : text,
       "seen" : seen,
-      "createdon" : createdon
+      "createdon" : createdon,
+      "messageId" : messageId
     };
   }
 }
