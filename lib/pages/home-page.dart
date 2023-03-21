@@ -4,6 +4,7 @@ import 'package:chat_app/models/ChatRoomModel.dart';
 import 'package:chat_app/models/FirebaseHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/ChatRoomPage.dart';
+import 'package:chat_app/pages/CompleteProfile.dart';
 import 'package:chat_app/pages/LoginPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,19 +22,20 @@ class HomePage extends StatefulWidget{
   State<StatefulWidget> createState() => HomePageState();
 }
 
+
+enum MenuValues{
+  profile,
+  signOut,
+}
+
+
 class HomePageState extends State<HomePage>{
 
   String profileName="akshay";
   var profilePic="https://cdn.siasat.com/wp-content/uploads/2022/04/akshay_kumar.jpg";
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-
 
     return Scaffold(
       backgroundColor: MyThemeData.creamColor,
@@ -51,11 +53,27 @@ class HomePageState extends State<HomePage>{
               },
               icon: Icon(Icons.search),
           ),
-          IconButton(onPressed: ()async{
-            await FirebaseAuth.instance.signOut();
-            Navigator.popUntil(context, (route) => route.isFirst);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-          }, icon: Icon(Icons.more_vert))
+          PopupMenuButton<MenuValues>(itemBuilder: (BuildContext context)=> [
+            PopupMenuItem(child : Text("Profile"),value: MenuValues.profile,),
+            PopupMenuItem(child: Text("Sign out"), value: MenuValues.signOut,),
+
+
+          ],
+          onSelected: (value)async{
+            switch(value){
+              case MenuValues.profile :
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> CompleteProfile(userModel: widget.userModel, firebaseUser: widget.firebaseUser)));
+                break;
+
+              case MenuValues.signOut :
+                await FirebaseAuth.instance.signOut();
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                break;
+
+              }
+          },
+          )
         ],
 
         // centerTitle: true,

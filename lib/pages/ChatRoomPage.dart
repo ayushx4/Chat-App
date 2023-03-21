@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:chat_app/Widgets/theme_data.dart';
 import 'package:chat_app/models/MassegeModel.dart';
 import 'package:chat_app/models/UserModel.dart';
+import 'package:chat_app/pages/ImageSentPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ class ChatRoomPage extends StatefulWidget{
 class ChatRoomPageState extends State<ChatRoomPage>{
   var messageController = TextEditingController();
   var profilePic="https://cdn.siasat.com/wp-content/uploads/2022/04/akshay_kumar.jpg";
-  String profileName="akshay";
 
   void sendMessage() async{
     String message = messageController.text;
@@ -106,17 +106,22 @@ class ChatRoomPageState extends State<ChatRoomPage>{
                                     mainAxisAlignment: (currentMessage.sender == widget.userModel.uid) ?
                                     MainAxisAlignment.end : MainAxisAlignment.start ,
                                     children: [
-                                      Container(
-                                          padding: EdgeInsets.all(9),
-                                          margin: EdgeInsets.symmetric(horizontal: 8),
-                                          decoration: BoxDecoration(
-                                              color: (currentMessage.sender == widget.userModel.uid) ?
-                                              MyThemeData.creamColor : Colors.white,
-                                              shape: BoxShape.rectangle,
-                                              borderRadius: BorderRadius.all(Radius.circular(8))
-                                          ),
-                                          child: Text(currentMessage.text.toString(),
-                                            style: TextStyle(color: Colors.deepPurple,fontSize: 18),)),
+                                      SizedBox(
+                                        width : 350,
+                                        child: Container(
+                                            padding: EdgeInsets.all(9),
+                                            margin: EdgeInsets.symmetric(horizontal: 8),
+                                            decoration: BoxDecoration(
+                                                color: (
+                                                    currentMessage.sender == widget.userModel.uid) ?
+                                                MyThemeData.creamColor : Colors.white,
+                                                shape: BoxShape.rectangle,
+                                                borderRadius: BorderRadius.all(Radius.circular(14)),
+
+                                            ),
+                                            child: Text(currentMessage.text.toString(),
+                                              style: TextStyle(color: Colors.deepPurple,fontSize: 18),)),
+                                      ),
                                     ],
                                   ),
                                 )
@@ -170,6 +175,18 @@ class ChatRoomPageState extends State<ChatRoomPage>{
                         ),
                       )
                   ),
+
+                  IconButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context)=>ImageSentpage(
+                                userModel: widget.userModel,
+                                firebaseUser: widget.firebaseUser,
+                                targetUserModel: widget.targetUserModel)));
+                      },
+                      icon: Icon(Icons.camera_alt)
+                  ),
+
                   IconButton(onPressed: (){
                     sendMessage();
                     setState(() {

@@ -142,30 +142,6 @@ class _CompleteProfileState extends State<CompleteProfile> {
       });
     }
     );
-    
-    log("Data Up to date %%%%%%%%%%%%%**********#########################");
-
-    // String imageUrl = await snapshot.ref.getDownloadURL().toString();
-    // String imageUrl = await snapshot.ref.getDownloadURL().toString();
-    // String imageUrl = imageUrl2.toString();
-
-    // String fullName = fullNameController.text.trim();
-
-    // log(imageUrl.toString());
-    // log(imageUrl.toString());
-    // log(imageUrl.toString());
-
-    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    log("image uuuurl&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
-    // widget.userModel.fullName = fullName;
-    // widget.userModel.profilePic =  imageUrl;
-    //
-    // await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap());
-    print('Data uploaded');
-    print('Data uploaded');
-    print('Data uploaded');
 
     Navigator.popUntil(context, (route) => route.isFirst);
     Navigator.pushReplacement(context,
@@ -174,14 +150,6 @@ class _CompleteProfileState extends State<CompleteProfile> {
         ));
 
   }
-
-
-
-
-
-
-
-
 
 
 
