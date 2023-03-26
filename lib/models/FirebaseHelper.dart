@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'UserModel.dart';
@@ -9,6 +11,8 @@ class FirebaseHelper {
     DocumentSnapshot documentSnapshot =await FirebaseFirestore.instance.collection("users").doc(uid).get();
 
     if(documentSnapshot != null){
+      log("we are in if condition============");
+      log(documentSnapshot.toString());
       userModel = UserModel.fromMap(documentSnapshot.data() as Map<String,dynamic>);
   }
 

@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/ChatRoomPage.dart';
+import 'package:chat_app/pages/home-page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:uuid/uuid.dart';
-
 import '../models/ChatRoomModel.dart';
 
 
@@ -172,6 +174,38 @@ class SearchPageState extends State<SearchPage>{
 
               ],
             ),
+          ),
+        ),
+      ),
+
+
+      bottomNavigationBar: Container(
+        color: Colors.teal.shade700,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 5),
+          child: GNav(
+            gap: 15,
+            haptic: true,
+            color: Colors.black,
+            backgroundColor: Colors.teal.shade700,
+            tabBackgroundColor: Colors.white24,
+            padding: EdgeInsets.all(10),
+            selectedIndex: 1,
+            tabs: [
+              GButton(icon: Icons.home_filled,
+                text: "Home",
+                onPressed: (){
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(userModel: widget.userModel, firebaseUser: widget.firebaseUser)));
+                },
+              ),
+              GButton(icon: Icons.search_rounded,
+                text: "Search",),
+              GButton(icon: FontAwesomeIcons.circleHalfStroke,
+              text: "HOT",),
+              GButton(icon: Icons.person,
+                text: "Profile",),
+            ],
           ),
         ),
       ),

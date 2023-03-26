@@ -45,6 +45,7 @@ dependencies:
   image_cropper: ^3.0.1
   uuid: ^3.0.7
   font_awesome_flutter: ^10.4.0
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
   flutter_test:

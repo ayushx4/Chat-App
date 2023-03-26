@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:chat_app/Widgets/theme_data.dart';
 import 'package:chat_app/models/UiHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
