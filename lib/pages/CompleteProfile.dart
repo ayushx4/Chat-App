@@ -115,6 +115,9 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
   }
 
+
+
+
   void uploadData() async{
 
     UiHelper.showLoadingDialog(context, "Uploading image...");
@@ -127,7 +130,8 @@ class _CompleteProfileState extends State<CompleteProfile> {
 
     // TaskSnapshot snapshot =await uploadTask.snapshot;
 
-    Reference storageReference = FirebaseStorage.instance.ref().child("profilePics").child(widget.userModel.uid.toString());
+    Reference storageReference = FirebaseStorage.instance.
+    ref().child("profilePic").child(widget.userModel.uid.toString());
     UploadTask uploadTask =  storageReference.putFile(File(imageFile!.path));
     await uploadTask.whenComplete(() => null);
 

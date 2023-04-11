@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:chat_app/models/ChatRoomModel.dart';
 import 'package:chat_app/models/FirebaseHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
 import 'package:chat_app/pages/ChatRoomPage.dart';
-import 'package:chat_app/pages/LoginPage.dart';
-import 'package:chat_app/pages/profilePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../Widgets/theme_data.dart';
 import 'SearchPage.dart';
+
 
 class HomePage extends StatefulWidget{
   final  UserModel userModel;

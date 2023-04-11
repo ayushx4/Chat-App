@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:chat_app/Widgets/theme_data.dart';
 import 'package:chat_app/models/FirebaseHelper.dart';
 import 'package:chat_app/models/UserModel.dart';
+import 'package:chat_app/pages/FlipCoin.dart';
 import 'package:chat_app/pages/LoginPage.dart';
 import 'package:chat_app/pages/home-page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,7 +65,8 @@ class MyApp extends StatelessWidget{
 
 
       ),
-      home: LoginPage(),
+      // home: LoginPage(),
+      home: FlipCoin(),
     );
   }
 }
@@ -90,7 +92,8 @@ class MyAppLoggedIn extends StatelessWidget{
           )
 
       ),
-      home: HomePage(userModel: userModel, firebaseUser: firebaseUser),
+      // home: HomePage(userModel: userModel, firebaseUser: firebaseUser),
+      home: FlipCoin(),
     );
   }
 

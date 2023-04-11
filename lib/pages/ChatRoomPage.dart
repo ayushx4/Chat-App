@@ -199,10 +199,6 @@ class ChatRoomPageState extends State<ChatRoomPage>{
                 ),
               ),
 
-
-
-
-
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 4),
                 height: 50 ,
@@ -217,13 +213,11 @@ class ChatRoomPageState extends State<ChatRoomPage>{
                   child: IconButton(onPressed: (){
                     sendMessage();
                     setState(() {
-
                     });
                   },
                     icon: Image.asset("assets/images/sent.png",color: Colors.teal ,fit: BoxFit.fitWidth),
                   ),
-                )
-                ,
+                ),
               )
             ],
           ),
